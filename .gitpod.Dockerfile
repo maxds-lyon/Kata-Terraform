@@ -1,8 +1,7 @@
-# Big image but it's cached on gitpod nodes already
 FROM gitpod/workspace-full:latest
 
-# Install tools as the gitpod user
 USER gitpod
+## Terraform
 RUN sudo apt-get update && sudo apt-get install -y gnupg software-properties-common \
     && wget -O- https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
@@ -16,20 +15,15 @@ RUN sudo apt-get update && sudo apt-get install -y gnupg software-properties-com
     && sudo apt update \
     && sudo apt-get install terraform
 
-# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+## Localstack-cli
+RUN pip install --upgrade pip \
+    && python3 -m pip install localstack
 
-# # Install helper tools
-# RUN brew update && brew upgrade && brew install \
-#     gawk coreutils pre-commit tfenv terraform-docs \
-#     tflint tfsec instrumenta/instrumenta/conftest \
-#     && brew install --ignore-dependencies cdktf \
-#     && brew cleanup
-# RUN tfenv install latest && tfenv use latest
-
-# COPY .gitpod.bashrc /home/gitpod/.bashrc.d/custom
-
-# Give back control
+## AWS Cli
+RUN sudo apt-get update && sudo apt-get install -y curl unzip \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && sudo ./aws/install
+    
 USER root
-#  and revert back to default shell
-#  otherwise adding Gitpod Layer will fail
 SHELL ["/bin/sh", "-c"]

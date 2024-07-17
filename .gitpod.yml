@@ -2,8 +2,8 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - command: |
-      source /home/gitpod/.bashrc.d/custom
+  - name: Start LocalStack
+    init: localstack start -d
 
 vscode:
   extensions:
