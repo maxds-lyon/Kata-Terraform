@@ -27,7 +27,9 @@ RUN sudo apt-get update && sudo apt-get install -y curl unzip \
     && unzip awscliv2.zip \
     && sudo ./aws/install
 
-COPY .aws-config /home/gitpod/.aws/config
+COPY config .
+RUN mkdir -p  /home/gitpod/.aws \ 
+    && mv config /home/gitpod/.aws/config
 
 USER root
 SHELL ["/bin/sh", "-c"]
