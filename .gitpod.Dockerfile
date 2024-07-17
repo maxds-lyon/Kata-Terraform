@@ -13,7 +13,9 @@ RUN sudo apt-get update && sudo apt-get install -y gnupg software-properties-com
     https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
     sudo tee /etc/apt/sources.list.d/hashicorp.list \
     && sudo apt update \
-    && sudo apt-get install terraform
+    && sudo apt-get install terraform \
+    && pip install --upgrade pip \ 
+    && pip install terraform-local
 
 ## Localstack-cli
 RUN pip install --upgrade pip \
@@ -24,6 +26,6 @@ RUN sudo apt-get update && sudo apt-get install -y curl unzip \
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && sudo ./aws/install
-    
+
 USER root
 SHELL ["/bin/sh", "-c"]
