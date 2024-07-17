@@ -4,6 +4,8 @@ image:
 tasks:
   - name: Start LocalStack
     init: localstack start -d
+  - name: AWS configure credential
+    init: aws configure set default.region us-east-1
 
 vscode:
   extensions:
