@@ -1,0 +1,13 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - command: |
+      source /home/gitpod/.bashrc.d/custom
+
+vscode:
+  extensions:
+    - hashicorp.terraform
+    - ms-azuretools.vscode-docker
+    - redhat.vscode-yaml
+    - esbenp.prettier-vscode
